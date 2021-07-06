@@ -13,7 +13,7 @@ export default function ValidationEmail() {
     
     try {
 
-      await axios.post(`http://localhost:8081/activate/${idUsuario}`,)
+      await axios.post(`https://server-gait.herokuapp.com/activate/${idUsuario}`,)
       .then(response =>{
         if(response.status === 200){
           alert('Email successfully validated');

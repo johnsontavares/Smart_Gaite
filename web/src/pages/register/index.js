@@ -119,6 +119,7 @@ function senhaForca(){
   }
   if((senha.length >= 5) && (senha.match(/[a-z]+/))){
     forca += 10;
+    
   }
   if((senha.length >= 6) && (senha.match(/[A-Z]+/))){
     forca += 20;

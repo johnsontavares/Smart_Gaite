@@ -53,9 +53,9 @@ export default class Clock extends React.Component {
     
        aumentar(e){
         
-        if(this.state.estado===''){
+        if(this.state.estado==='Loadind...'){
           this.setState({
-            contador: this.state.contador-1
+            contador: this.state.contador-1,
             
           });
           
@@ -64,8 +64,6 @@ export default class Clock extends React.Component {
           if(this.state.contador === 0){         
             window.location.href= '/confirmEmail';
         }
-        }else{
-          alert("Please, fill in all fields")
         }
       }
       async handleContadorminus(){

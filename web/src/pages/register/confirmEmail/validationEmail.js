@@ -1,20 +1,26 @@
 import {useParams} from 'react-router-dom';
-import Button from '@material-ui/core/Button';
 import {useEffect} from 'react';
+import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
 
 
 export default function ValidationEmail() {
   
-  const {idUsuario} = useParams();
 
+  const {idUsuario} = useParams();
   try {
   useEffect(() => {
     
       async function getUsuario(){
-        var response = await axios.get(`https://server-gait.herokuapp.com/activate/${idUsuario}`);
-      
+        var response = await axios.get(`http://localhost:8081/activate/${idUsuario}`);
+       if(response.status === 200){
+        alert(response.data.message);
+       }else{
+        alert(response.data.message);
+       }
+        
+       console.log(response.data.message)
       }
   
       getUsuario();
@@ -25,12 +31,7 @@ export default function ValidationEmail() {
   const { data } = error.response;
   alert(data.message);
 }
-
-
-
-
-
-  async function hundleSub(e){
+  function hundleSub(e){
     e.preventDefault()
     window.location.href= '/';
   }
@@ -48,6 +49,5 @@ export default function ValidationEmail() {
       
     </form>
 </div>
-
   );
 }

@@ -48,7 +48,7 @@ export default class Home extends Component {
         }
         return (
             <div>
-             <h2></h2>
+             <h2>No logado</h2>
               
             </div>
             

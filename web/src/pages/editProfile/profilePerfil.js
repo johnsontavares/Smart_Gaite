@@ -52,13 +52,12 @@ try {
         const response = await Api.put(`updateUser/${idUsuario}`,data, config);
 
         if(response.status===200){
-          alert('Profile edited successfully')
           window.location.href='/viewProfile'
         }else{
           alert('Error updating user!');
         }
       }else{
-        alert('fill in the data!');
+        alert('Please fill in all data!');
       }
 } catch (error) {
     const { data } = error.response;

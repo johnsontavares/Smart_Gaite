@@ -49,15 +49,13 @@ export default class Profile extends Component{
                         <th>NOME </th><br></br>
                         <th>E-MAIL </th><br></br>
                         <th>ESPECIALIZAÇÃO </th><br></br>
-                        <th>TELEFONE1</th><br></br>
-                        <th>TELEFONE2</th><br></br>
+                        <th>TELEFONE </th><br></br>
                     </tr>
                         <tr>
                         <td>{this.state.userDoctor.name}</td><br></br>
                         <td>{this.state.userDoctor.email}</td><br></br>
                         <td>{this.state.userDoctor.specialization}</td><br></br>
                         <td>{this.state.userDoctor.phone}</td><br></br>
-                        <td>{this.state.userDoctor.phone2}</td><br></br>
                         </tr>
                     </table>
                     <br></br>

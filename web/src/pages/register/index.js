@@ -41,8 +41,7 @@ export default function Register() {
     
     sessionStorage.setItem('emailValidator', email);
     try {
-      if(name!==''&&email!==''&&password!==''&&crm!==''&&phone!==''&&specialization!==''&&confirmPassword!==''){
-        
+      if(name!==''&&email!==''&&password!==''&&crm!==''&&phone!==''&&specialization!==''){
         
         if(password !== confirmPassword){
           alert("Confirm Invalid Password")
@@ -57,7 +56,7 @@ export default function Register() {
         }
         setLoading(false);
       }else{
-        alert("Please, fill in all fields")
+        alert("Fill in all data")
         setLoading(false);
       }
       
@@ -120,7 +119,6 @@ function senhaForca(){
   }
   if((senha.length >= 5) && (senha.match(/[a-z]+/))){
     forca += 10;
-    
   }
   if((senha.length >= 6) && (senha.match(/[A-Z]+/))){
     forca += 20;
@@ -150,18 +148,20 @@ function mostrarForca(forca){
 return (
   <div >
   <div><a href="/"><img src="https://i.imgur.com/tDvwyyA.png" className={'logo2'} title="source: imgur.com" /></a></div>
-    <form>
+    <form >
     
       <h1 className='title'>Register</h1>
       <h1 className='title'>{loading?<CircularProgress color="secondary"/>:''}</h1>
       <h2 className='subtitle'>Fill in the information below</h2>
       <div className={"question"}>
+      
         <Input mask="crm" placeholder="*CRM" id="crm" name="crm" type="text" required
           onBlur={onblurCrm}
           onChange={e => setCrm(e.target.value)}
         />
        
       </div>
+      
       <br></br>
       <div className = {"question"}>
       <input name="name" id="name" type="text" required
@@ -192,7 +192,10 @@ return (
       </div>
       
       <br></br>
+      
       <div className={"question"}>
+     
+        
       <Input mask="telefone" placeholder="Phone2" id="phone2" name="phone2" type="text" 
          onChange={e => setPhone2(e.target.value)}
         />
@@ -203,7 +206,7 @@ return (
           <input name="email" id="email" type="email" required
           onChange={e => setEmail(e.target.value)}
            />
-          <label>*Email:</label>
+          <label>*E-mail:</label>
         </div>
         <br></br>
         <div className={"question"}>
@@ -234,16 +237,16 @@ return (
       <AlertDialog/>
       <input type="checkbox"  onChange={textChange.bind(this)} />
      
-      <label> I have read and accept the Terms of Use</label>
+      <label> I agree with the terms</label>
       <br></br>
       <br></br>
       
     </div>  
     <Button 
      fullWidth type="submit" variant="contained"
-     onClick={submitOn}
+      onClick={submitOn}
       disabled={!checked.input} color="primary">Sign Up</Button>
     </form>
   </div>
 );
-  }
+}

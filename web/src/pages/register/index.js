@@ -66,8 +66,6 @@ export default function Register() {
       alert(data.message);
       
     }
-        
-      
     
 }
 
@@ -119,7 +117,6 @@ function senhaForca(){
   }
   if((senha.length >= 5) && (senha.match(/[a-z]+/))){
     forca += 10;
-    
   }
   if((senha.length >= 6) && (senha.match(/[A-Z]+/))){
     forca += 20;
@@ -169,12 +166,16 @@ return (
         <label>*Name:</label>
       </div>
       <br></br>
+
       <div className = {"question"}>
         <InputMask mask="999.999.999-99" name="cpf" type="text" id="cpf" required
         onChange={e => setCpf(e.target.value)}
         />  
         <label>*CPF:</label>
+
       </div>
+
+      
       <div className={"question"}>
         <input name="specialization" id="specialization" type="text" required
          value={specialization}
@@ -183,16 +184,21 @@ return (
         <label>*Specialization:</label>
       </div>
       <br></br>
+
       <div className={"question"}>
-      <Input mask="telefone" placeholder="*Phone" id="phone" name="phone" type="text" required
+
+      <InputMask mask="(99)99999-9999" placeholder="*Phone" id="phone" name="phone" type="text" required
          onChange={e => setPhone(e.target.value)}
         />
          
       </div>
       
       <br></br>
+      
       <div className={"question"}>
-      <Input mask="telefone" placeholder="Phone2" id="phone2" name="phone2" type="text" 
+     
+        
+      <InputMask mask="(99)99999-9999" placeholder="Phone2" id="phone2" name="phone2" type="text" 
          onChange={e => setPhone2(e.target.value)}
         />
          

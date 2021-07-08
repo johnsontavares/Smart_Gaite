@@ -72,11 +72,21 @@ class AllUsers{
             }   
         }
         var regexPhone =  new RegExp("^[(][1-9]{2}[)](?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$");
+        var regexPhone2 =  new RegExp("^[(][1-9]{2}[)](?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$");
+
         var regexPassword = new RegExp("^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{6,13}$");
         var regexCpf = new RegExp("([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})")
         var regexEmail = new RegExp(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i);
-        if(regexPhone.test(phone) ){
+
+
+        
+        if(!regexPhone2.test(phone2)&&(phone2.length != "") ){
             
+            return res.status(404).json({ message: "Invalid phone2" }); 
+         }
+
+        if(!regexPhone.test(phone) ){
+            console.log("back-end invalid phone")
            return res.status(404).json({ message: "Invalid phone" }); 
         }
         
@@ -94,6 +104,7 @@ class AllUsers{
         if(password.length > 13){
             return res.status(400).json({ message: "Maximum password of 13 characters" });
         }
+
         
         
         

@@ -106,13 +106,13 @@ export default function Confirmation() {
       </div>
       <br></br>
       <div className={"question"}>
-        <InputMask mask="(99) 99999-9999" id="phone" name="phone" type="text" required
+        <InputMask mask="(99)99999-9999" id="phone" name="phone" type="text" required
             value={phone}
         />
         <label>Phone:</label>   
       </div>
       <div className={"question"}>
-        <InputMask mask="(99) 99999-9999" id="phone2" name="phone2" type="text" required
+        <InputMask mask="(99)99999-9999" id="phone2" name="phone2" type="text" required
             value={phone2}       
         />
         <label>Phone2:</label>   

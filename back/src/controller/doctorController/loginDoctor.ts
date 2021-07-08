@@ -8,12 +8,16 @@ import DoctorRepository from '../../repositorie/doctorRepositorie';
 class LoginDoctorController {
     public async signInDoctor(req: Request, res: Response) {
         const repo = getCustomRepository(DoctorRepository);
-
+        var regexEmail = new RegExp("^[a-zA-Z0-9]+[@]+[a-zA-Z0-9]+.com$");
         const { email, password } = req.body;
 
         const doctor = await repo.findByEmail(email);
         if (!doctor) {
             return res.status(404).json({ message: "Email not registered in the system" });
+        }
+        if(!(regexEmail).test(email)){
+            return res.status(404).json({message:'Invalid email'});
+
         }
         if (!doctor.password) {
             return res.status(404).json({ message: "Inactive or invalid password" });
@@ -25,7 +29,7 @@ class LoginDoctorController {
         const isValidatePassword = await bcrypt.compare(password, doctor.password as string);
 
         if (!isValidatePassword) {
-            return res.status(401).json({ message: "Incorrect email or password"  });
+            return res.status(401).json({ message: "Invalid Email or Password'"  });
         }
         
         const token = jwt.sign({ id: doctor.id }, 'secret', { expiresIn: '1d' });

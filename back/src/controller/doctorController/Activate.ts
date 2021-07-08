@@ -12,7 +12,7 @@ class Activate {
         try {
         const testeRepository = getRepository(Doctor);
         
-        const doctor = await testeRepository.findOne({where: { id }});
+        const doctor = await testeRepository.findOne(req.params.id);
         if(!doctor){
             return res.status(404).json({ message: "User not found" });
         }
@@ -20,7 +20,7 @@ class Activate {
         
         doctor.activate = 1;
 
-        await testeRepository.save(doctor);
+        await testeRepository.update(id, doctor);
 
         return res.status(200).json({ message: "Email successfully validated!" });
         } catch (error) {

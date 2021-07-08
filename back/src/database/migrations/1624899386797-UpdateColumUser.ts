@@ -1,6 +1,6 @@
-import {MigrationInterface, QueryRunner, TableColumn} from "typeorm";
+import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class UpdateColumUser1623685909234 implements MigrationInterface {
+export class UpdateColumUser1624899386797 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query('ALTER TABLE doctors DROP COLUMN phone2')

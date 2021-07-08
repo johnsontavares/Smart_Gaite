@@ -10,7 +10,8 @@ export default class Clock extends React.Component {
         this.state={
           contador:60,
           email:'',
-          estado:"Confirm e-mail",
+          estado:"Confirm email",
+          disabled:true
           
         }
         
@@ -39,9 +40,10 @@ export default class Clock extends React.Component {
           alert(data.message);
           }
         
-        if (this.state.estado==="Confirm e-mail"){
+        if (this.state.estado==="Confirm email"){
           this.setState({
-            estado: ''
+            estado: 'Loadind...',
+            disabled:false
           });
           this._interval=setInterval(this.aumentar,1000);
           }
@@ -62,6 +64,8 @@ export default class Clock extends React.Component {
           if(this.state.contador === 0){         
             window.location.href= '/confirmEmail';
         }
+        }else{
+          alert("Please, fill in all fields")
         }
       }
       async handleContadorminus(){
@@ -97,9 +101,9 @@ export default class Clock extends React.Component {
           <div className=" text-center">
     
             <h1>{this.state.contador}</h1>
-            <Botao  text={this.state.estado}   onClick={this.handleContadorplus}/>
-            <Botao text={this.state.estado?'Resend':''}  onClick={this.handleContadorminus}/> 
-            <Botao text="Close"  onClick={this.close}/> 
+            <Botao text={this.state.estado} disabled={!this.state.disabled}  onClick={this.handleContadorplus}/>
+            <Botao text={'Resend'} disabled={!this.state.disabled}  onClick={this.handleContadorminus} /> 
+            <Botao text="Close"   onClick={this.close}/> 
           </div>
         );
       }

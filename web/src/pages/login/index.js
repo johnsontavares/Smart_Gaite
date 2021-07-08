@@ -30,7 +30,7 @@ export default function SignIn() {
     })
     setLoading(false);
       }else{
-        alert('Please !, fill in all the data!');
+        alert("Please, fill in all fields")
       }
       setLoading(false);
     } catch (error) {
@@ -59,7 +59,7 @@ return (
     
     <div className={"question"}>
     <input type="email" name="email"id="email" type="email" required required onChange={e => setEmail(e.target.value)} />
-    <label>E-mail:</label>
+    <label>Email:</label>
     </div>
     <div className = {"question"}>
     <input type="password" name="password" required 

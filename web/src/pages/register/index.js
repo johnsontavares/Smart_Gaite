@@ -41,7 +41,8 @@ export default function Register() {
     
     sessionStorage.setItem('emailValidator', email);
     try {
-      if(name!==''&&email!==''&&password!==''&&crm!==''&&phone!==''&&specialization!==''){
+      if(name!==''&&email!==''&&password!==''&&crm!==''&&phone!==''&&specialization!==''&&confirmPassword!==''){
+        
         
         if(password !== confirmPassword){
           alert("Confirm Invalid Password")
@@ -56,7 +57,7 @@ export default function Register() {
         }
         setLoading(false);
       }else{
-        alert("Fill in all data")
+        alert("Please, fill in all fields")
         setLoading(false);
       }
       
@@ -149,7 +150,7 @@ function mostrarForca(forca){
 return (
   <div >
   <div><a href="/"><img src="https://i.imgur.com/tDvwyyA.png" className={'logo2'} title="source: imgur.com" /></a></div>
-    <form onSubmit={submitOn}>
+    <form>
     
       <h1 className='title'>Register</h1>
       <h1 className='title'>{loading?<CircularProgress color="secondary"/>:''}</h1>
@@ -202,7 +203,7 @@ return (
           <input name="email" id="email" type="email" required
           onChange={e => setEmail(e.target.value)}
            />
-          <label>*E-mail:</label>
+          <label>*Email:</label>
         </div>
         <br></br>
         <div className={"question"}>
@@ -233,14 +234,14 @@ return (
       <AlertDialog/>
       <input type="checkbox"  onChange={textChange.bind(this)} />
      
-      <label> I agree with the terms</label>
+      <label> I have read and accept the Terms of Use</label>
       <br></br>
       <br></br>
       
     </div>  
     <Button 
      fullWidth type="submit" variant="contained"
-     
+     onClick={submitOn}
       disabled={!checked.input} color="primary">Sign Up</Button>
     </form>
   </div>

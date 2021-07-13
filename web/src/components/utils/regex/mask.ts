@@ -46,12 +46,14 @@ export function cep(e: React.FormEvent<HTMLInputElement>) {
   export function telefone(e: React.FormEvent<HTMLInputElement>) {
     
     let value = e.currentTarget.value;
+    e.currentTarget.maxLength = 14;
     value = value.replace(/\D+/g, '')
     value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/,"($1) $2-$3");
-    
+    // value = value.replace(/^(\d{2})(\d{5})(\d{4}).*/,"($1)$2-$3");
+    console.log(value)
     e.currentTarget.value = value;
    
-    return e;
+    return e
   }
 
   export function password(e: React.FormEvent<HTMLInputElement>) {

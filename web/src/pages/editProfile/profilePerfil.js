@@ -30,7 +30,7 @@ export default function ProfilePerfil() {
     const [phone2, setPhone2] =  useState('');
     const {idUsuario} = useParams();
     
-    
+   
 
 async function handleSubmit(e){
     e.preventDefault();
@@ -52,7 +52,9 @@ try {
         const response = await Api.put(`updateUser/${idUsuario}`,data, config);
 
         if(response.status===200){
+          alert('Profile edited successfully')
           window.location.href='/viewProfile'
+          
         }else{
           alert('Error updating user!');
         }
@@ -111,6 +113,7 @@ try {
                         <br></br>
                         <div className={"question"}>
                          <Input mask="telefone"  placeholder="phone2" id="phone2" name="phone2" type="text" required
+                            
                             onChange={e => setPhone2(e.target.value)}
                         />
                             

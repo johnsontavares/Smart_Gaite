@@ -43,7 +43,7 @@ class ProfileController {
       userDoc.specialization = specialization;
 
       userRepository.save(userDoc);
-      return response.status(200).json({message: "User not found"})
+      return response.status(200).json({message: "Profile edited successfully"})
     } 
     } catch (error) {
       return response.status(404).json({error})

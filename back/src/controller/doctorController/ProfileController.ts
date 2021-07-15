@@ -26,6 +26,20 @@ class ProfileController {
 
     
     const {specialization, phone, phone2} = request.body;
+
+    var regexPhone =  new RegExp("^[0-9]{11}");
+    var regexPhone2 =  new RegExp("^[0-9]{11}");
+
+    if(!regexPhone2.test(phone2)&&(phone2.length != "") ){
+            
+      return response.status(404).json({ message: "Invalid phone2" }); 
+   }
+   
+   if(!regexPhone.test(phone) ){
+      console.log("back-end invalid phone")
+     return response.status(404).json({ message: "Invalid phone" }); 
+  }
+
     try {
 
   if(phone.length < 6){

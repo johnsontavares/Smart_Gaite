@@ -10,6 +10,11 @@ import jwt from 'jsonwebtoken';
 
 class AllUsers{
 
+    public async getUserData(req:Request, res:Response): Promise<Response>{
+        const DoctorData = await getRepository(Doctor).findOne(req.params.id);
+        return res.json(DoctorData);
+    }
+
 
     public async getAll(req:Request, res:Response): Promise<Response>{
         

@@ -1,5 +1,5 @@
 import {useParams} from 'react-router-dom';
-import {useState}from 'react';
+import {useEffect, useState}from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Api from '../../services/api';
 import Button from '../../components/utils/button/button';
@@ -9,7 +9,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Input from "../../components/utils/regex/input";
-
+import InputMask from 'react-input-mask';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +30,28 @@ export default function ProfilePerfil() {
     const [phone2, setPhone2] =  useState('');
     const {idUsuario} = useParams();
     
-   
+    
+
+    ////////////////// rota get //////////////////
+
+try {
+
+  useEffect(()=>{
+    async function getUserData(){
+      var response = await Api.get('profilePerfil/'+idUsuario)
+      setPhone(response.data.phone)
+      setPhone2(response.data.phone2)
+      setSpecialization(response.data.specialization)
+      // console.log(response.data.specialization)
+    }
+    getUserData()
+  
+},[])
+
+} catch (error) {
+  const { data } = error.response;
+  alert(data.message);
+}
 
 async function handleSubmit(e){
     e.preventDefault();
@@ -52,9 +73,7 @@ try {
         const response = await Api.put(`updateUser/${idUsuario}`,data, config);
 
         if(response.status===200){
-          alert('Profile edited successfully')
           window.location.href='/viewProfile'
-          
         }else{
           alert('Error updating user!');
         }
@@ -65,6 +84,8 @@ try {
     const { data } = error.response;
     alert(data.message);
 }
+
+
 
 }
 
@@ -83,8 +104,9 @@ try {
                     <Select
                       labelId="labelTipo"
                       id="tipo"
-                      value={specialization}
                       onChange={e => setSpecialization(e.target.value)}
+                      value= {specialization}
+
                     >
                       <MenuItem value={"Cardiologia"}>Cardiologia</MenuItem>
                       <MenuItem value={"Dermatologia"}>Dermatologia</MenuItem>
@@ -99,23 +121,38 @@ try {
                       <MenuItem value={"Endocrinologia"}>Endocrinologia</MenuItem>
                       <MenuItem value={"Neurologia"}>Neurologia</MenuItem>
                       <MenuItem value={"Hematologia"}>Hematologia</MenuItem>
-                      <MenuItem value={"CirurgiaPlástica"}>Cirurgia Plástica</MenuItem>
+                      <MenuItem value={"CIRURGIA PlÁSTICA"}>Cirurgia Plástica</MenuItem>
+                      <MenuItem value={"CIRURGIA GERAL"}>Cirurgia Geral</MenuItem>
+                      <MenuItem value={"GINECOLOGIA E OBSTETRÍCIA (Ultra-sonografia em ginecologia e obstetrícia)"}>GINECOLOGIA E OBSTETRÍCIA (Ultra-sonografia em ginecologia e obstetrícia)</MenuItem>
+
+                      console.log(specialization)
+                      {/* <MenuItem value={specialization}>{specialization}</MenuItem> */}
+
                     </Select>
                     </FormControl>
                     
                     <br></br>
                     
                     <div className={"question"}>
-                         <Input mask="telefone" placeholder="phone" id="phone" name="phone" type="text" required
-                            onChange={e => setPhone(e.target.value)}
+                         <InputMask mask="(99)99999-9999" placeholder="phone" id="phone" name="phone" type="text" required
+                           
+                           
+                           onChange={e => setPhone(e.target.value.replace(/-/g,"").replace("(","").replace(")","") )}
+                           
+                            value = {phone}
+                            
+
                         />
                         </div>
                         <br></br>
                         <div className={"question"}>
-                         <Input mask="telefone"  placeholder="phone2" id="phone2" name="phone2" type="text" required
-                            
-                            onChange={e => setPhone2(e.target.value)}
+                         <InputMask mask="(99)99999-9999"  placeholder="phone2" id="phone2" name="phone2" type="text" required
+                            onChange={e => setPhone2(e.target.value.replace(/-/g,"").replace("(","").replace(")","") )}
+                          
+                            value = {phone2}
                         />
+
+
                         </div>
                         <br></br>
                         <Button onClick={handleSubmit}  buttonSize='btn--large'  type="submit">To edit</Button>

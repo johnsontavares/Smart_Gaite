@@ -34,12 +34,9 @@ export default class Home extends Component {
         if(this.state.userDoctor){
             return(
                
-                
+          
    
                 <div>
-                    
-
-
                     
                 <h1>Olá <h2>{this.state.userDoctor.name}</h2></h1>
                 <h2>Opções: </h2>

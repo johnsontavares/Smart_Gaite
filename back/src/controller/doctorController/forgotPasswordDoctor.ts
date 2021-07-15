@@ -13,7 +13,7 @@ class ForgotDoctorPassword {
 
         const { email } = req.body;
         
-        console.log(">>>>>>>>>>>>>forgotpassword",email)
+
         try {
 
             const user = await doctorRepository.findByEmail(email);
@@ -88,8 +88,7 @@ class ForgotDoctorPassword {
         user.password = passwordHashed;
 
         
-        //const results = await getRepository(Doctor).save(user);
-        const results = await getRepository(Doctor).update(user.id, user);
+        const results = await getRepository(Doctor).save(user);
         return res.json(results);
         } catch (error) {
             

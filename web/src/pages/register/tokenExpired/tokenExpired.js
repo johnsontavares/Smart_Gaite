@@ -7,7 +7,7 @@ export default function TokenExpired(){
     const {idUsuario} = useParams();
     const [pessoa, setPessoa] = useState('');
 
-  Api.get(`http://localhost:8081/userId/${idUsuario}`)
+    Api.get(`http://localhost:8081/userId/${idUsuario}`)
   .then(resp=>{
     setPessoa(resp.data.email);
     const pessoa = sessionStorage.setItem('refreshToken', resp.data.email);

@@ -8,12 +8,16 @@ import DoctorRepository from '../../repositorie/doctorRepositorie';
 class LoginDoctorController {
     public async signInDoctor(req: Request, res: Response) {
         const repo = getCustomRepository(DoctorRepository);
-
+        var regexEmail = new RegExp("^[a-zA-Z0-9]+[@]+[a-zA-Z0-9]+.com$");
         const { email, password } = req.body;
 
         const doctor = await repo.findByEmail(email);
         if (!doctor) {
             return res.status(404).json({ message: "Email not registered in the system" });
+        }
+        if(!(regexEmail).test(email)){
+            return res.status(404).json({message:'Invalid email'});
+
         }
         if (!doctor.password) {
             return res.status(404).json({ message: "Inactive or invalid password" });

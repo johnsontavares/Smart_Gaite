@@ -8,10 +8,13 @@ import AllUsers from '../controller/doctorController/getAllUsers';
 import ForgotePassword from '../controller/doctorController/forgotPasswordDoctor';
 import EnableDoctorController from '../controller/doctorController/enableDoctor';
 import SendEmail from '../controller/doctorController/sendEmailController';
+import DoctorRepository from '../repositorie/doctorRepositorie';
+import {Request, Response} from "express";
+import { getCustomRepository, getRepository } from 'typeorm';
 
 const routes = Router();
 routes.post('/doctorSignUp', CreateDoctorController.createDoctor);
-routes.post('/activate/:id',Activate.verifyActivate);
+routes.get('/activate/:id',Activate.verifyActivate);
 routes.get('/allUser',AllUsers.getAll);
 routes.post('/signInDoctor', LoginDoctorController.signInDoctor);
 routes.get('/showProfile', [verifyToken, isDoctor], ProfileController.show);
@@ -22,5 +25,9 @@ routes.post('/emailUpdate', ForgotePassword.forgotDoctorPassword);
 routes.put('/updateMailSend/:id', SendEmail.updateEmail);
 routes.post('/findEmail/', SendEmail.findEmail);
 routes.post('/verifyUser', AllUsers.getUser);
+
+routes.get('/profilePerfil/:id', AllUsers.getUserData);
+
+
 routes.post('/sendEmailController', SendEmail.sendEmail);
 export default routes;

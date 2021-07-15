@@ -12,6 +12,7 @@ import Justification from '../src/pages/enableProfile/justification';
 import ConfirmPassword from '../src/pages/forgotPassword/confirmPassword';
 import ConfirmEmail from '../src/pages/register/confirmEmail/index';
 import ValidationEmail from '../src/pages/register/confirmEmail/validationEmail';
+import ExpiredToken from '../src/pages/register/tokenExpired/tokenExpired';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/confirmPassword/:idUsuario" exact component={ConfirmPassword}/>
             <Route path="/confirmEmail" exact component={ConfirmEmail}/>
             <Route path="/validationEmail/:idUsuario" exact component={ValidationEmail}/>
+            <Route path="/expireToken/:idUsuario" exact component={ExpiredToken}/>
             </Switch>
         </BrowserRouter>
     </div>

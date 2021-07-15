@@ -3,9 +3,17 @@ import {  Request, Response } from 'express';
 import Doctor from '../../models/Doctor';
 import DoctorRepository from '../../repositorie/doctorRepositorie';
 var axios = require('axios');
+import nodemailer from 'nodemailer';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 
 class AllUsers{
+
+    public async getUserData(req:Request, res:Response): Promise<Response>{
+        const DoctorData = await getRepository(Doctor).findOne(req.params.id);
+        return res.json(DoctorData);
+    }
 
 
     public async getAll(req:Request, res:Response): Promise<Response>{
@@ -14,12 +22,73 @@ class AllUsers{
         
         return res.json(allDoctors);
     }
+    public async getUserId(req:Request, res:Response): Promise<Response>{
+        
+        const doc = await getRepository(Doctor).findOne(req.params);
+        
+        return res.json(doc);
+    }
+    public async updateToken(req:Request, res:Response): Promise<Response>{
+        
+        const doc = await getRepository(Doctor).findOne(req.params);
+        
+        return res.json(doc);
+    }
+    
+    public async sendToken(req:Request, res:Response){
+        
+        const doctorRepository = getCustomRepository(DoctorRepository);
+
+        const {email} = req.body;
+
+        try {
+        const user = await doctorRepository.findByEmail(email);
+        if(!user){
+            return res.status(404).json({ message: "Email not registered in the system" })
+        }
+        
+
+        const id = user.id
+
+        const salt =  bcrypt.genSalt(1);
+        const newToken = jwt.sign({ id: salt }, 'secret', { expiresIn: 300 });//5minutos
+        user.token = newToken;
+        doctorRepository.update(id, user)
+        console.log("Reenvio de token>>>>>>>>>>>>",user)
+
+
+        var transport = nodemailer.createTransport({
+            host: 'smtp.mailtrap.io',
+                port: 2525,
+                auth: {
+                    user: "0be89881ec1c58",
+                    pass: "f2fa7550b78068"
+                }
+        });
+        const url = `http://localhost:3000/validationEmail/${id}`;
+        transport.sendMail({
+            from: 'Testando <92fe25ba83-325b9d@inbox.mailtrap.io>',
+            to: email,
+            subject: 'Registration completed successfully',
+            html: `To confirm your registration click on the link: <a href="${url}">${url}</a>`
+        });
+
+
+        res.status(200).json({message:'Confirmation link sent successfully'});
+        
+        } catch (error) {
+            res.status(400).json({message:'sorry something went wrong'})
+        }
+    }
     
     public async getUser(req:Request, res:Response){
       
         const  {name, cpf, crm, email, password, phone, phone2} = req.body;
+
         const doctorRepository =  getCustomRepository(DoctorRepository);
-        console.log(email)
+        
+        console.log(phone)
+        console.log(phone2)
         const emailExists = await doctorRepository.findByEmail(email);
         if (emailExists) {
             return res.status(409).json({ message: "Email already registered in the system" });
@@ -71,25 +140,24 @@ class AllUsers{
                } 
             }   
         }
-        var regexPhone =  new RegExp("^[(][1-9]{2}[)](?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$");
-        var regexPhone2 =  new RegExp("^[(][1-9]{2}[)](?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$");
-
+        var regexPhone =  new RegExp("^[0-9]{11}");
+        var regexPhone2 =  new RegExp("^[0-9]{11}");
         var regexPassword = new RegExp("^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{6,13}$");
         var regexCpf = new RegExp("([0-9]{2}[\.]?[0-9]{3}[\.]?[0-9]{3}[\/]?[0-9]{4}[-]?[0-9]{2})|([0-9]{3}[\.]?[0-9]{3}[\.]?[0-9]{3}[-]?[0-9]{2})")
-        var regexEmail = new RegExp(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i);
-
-
+        var regexEmail = new RegExp("^[a-zA-Z0-9]+[@]+[a-zA-Z0-9]+.com$")
+       
+        
         
         if(!regexPhone2.test(phone2)&&(phone2.length != "") ){
             
             return res.status(404).json({ message: "Invalid phone2" }); 
          }
-
-        if(!regexPhone.test(phone) ){
+         
+         if(!regexPhone.test(phone) ){
             console.log("back-end invalid phone")
            return res.status(404).json({ message: "Invalid phone" }); 
         }
-        
+       
         if(!regexCpf.test(cpf)){
             return res.status(404).json({ message: "Invalid CPF" });   
         }
@@ -104,9 +172,13 @@ class AllUsers{
         if(password.length > 13){
             return res.status(400).json({ message: "Maximum password of 13 characters" });
         }
+        
+        
 
-        
-        
+        if(!(regexEmail).test(email)){
+            return res.status(404).json({message:'Invalid email'});
+
+        }
         
     return res.status(201).json({message:'ok'});
         } catch (error) {

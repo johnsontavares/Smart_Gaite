@@ -1,4 +1,5 @@
 import {useParams} from 'react-router-dom';
+import {useEffect,useState} from 'react';
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
@@ -6,39 +7,39 @@ import axios from 'axios';
 
 export default function ValidationEmail() {
   
+//
   const {idUsuario} = useParams();
+  const [msg, setMsg] = useState('');
 
-  async function hundleSub(e){
+  axios.get(`http://localhost:8081/activate/${idUsuario}`)
+  .then(resp=>{
+    console.log(resp.data.message);
+    setMsg(resp.data.message);
+  })  
+  .catch(error=>{
+    const { data } = error.response;
+    alert(data.message);
+    window.location.href= `/expireToken/${idUsuario}`;
+  });
+
+  function hundleSub(e){
     e.preventDefault()
-    
-    try {
-
-      await axios.post(`https://server-gait.herokuapp.com/activate/${idUsuario}`,)
-      .then(response =>{
-        if(response.status === 200){
-          alert('Email successfully validated');
-          window.location.href= '/';
-        }
-      })
-    } catch (error) {
-      const { data } = error.response;
-      alert(data.message);
-      window.location.href= '/';
-    }
-      
-      
+    window.location.href= '/';
     
   }
   
-  
+  //Email successfully validated!
   return (
+    <div>
+
     <form>
-      <h2 className='subtitle'>CONFIRM REGISTRATION</h2>
+    
+      <h2 className='subtitle'>{msg}</h2>
       <Button onClick={hundleSub} type='submit' fullWidth  variant="contained" color="secondary">
       Continue
       </Button>
       
     </form>
-
+</div>
   );
 }

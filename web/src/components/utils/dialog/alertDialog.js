@@ -20,7 +20,7 @@ export default function AlertDialog() {
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Termos de Uso
+      Terms of use
       </Button>
       <Dialog
         open={open}

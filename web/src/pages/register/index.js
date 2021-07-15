@@ -66,6 +66,8 @@ export default function Register() {
       alert(data.message);
       
     }
+        
+      
     
 }
 
@@ -146,18 +148,20 @@ function mostrarForca(forca){
 return (
   <div >
   <div><a href="/"><img src="https://i.imgur.com/tDvwyyA.png" className={'logo2'} title="source: imgur.com" /></a></div>
-    <form onSubmit={submitOn}>
+    <form >
     
       <h1 className='title'>Register</h1>
       <h1 className='title'>{loading?<CircularProgress color="secondary"/>:''}</h1>
       <h2 className='subtitle'>Fill in the information below</h2>
       <div className={"question"}>
+      
         <Input mask="crm" placeholder="*CRM" id="crm" name="crm" type="text" required
           onBlur={onblurCrm}
           onChange={e => setCrm(e.target.value)}
         />
        
       </div>
+      
       <br></br>
       <div className = {"question"}>
       <input name="name" id="name" type="text" required
@@ -166,16 +170,12 @@ return (
         <label>*Name:</label>
       </div>
       <br></br>
-
       <div className = {"question"}>
         <InputMask mask="999.999.999-99" name="cpf" type="text" id="cpf" required
         onChange={e => setCpf(e.target.value)}
         />  
         <label>*CPF:</label>
-
       </div>
-
-      
       <div className={"question"}>
         <input name="specialization" id="specialization" type="text" required
          value={specialization}
@@ -184,10 +184,8 @@ return (
         <label>*Specialization:</label>
       </div>
       <br></br>
-
       <div className={"question"}>
-
-      <InputMask mask="(99)99999-9999" placeholder="*Phone" id="phone" name="phone" type="text" required
+      <Input mask="telefone" placeholder="*Phone" id="phone" name="phone" type="text" required
          onChange={e => setPhone(e.target.value)}
         />
          
@@ -198,7 +196,7 @@ return (
       <div className={"question"}>
      
         
-      <InputMask mask="(99)99999-9999" placeholder="Phone2" id="phone2" name="phone2" type="text" 
+      <Input mask="telefone" placeholder="Phone2" id="phone2" name="phone2" type="text" 
          onChange={e => setPhone2(e.target.value)}
         />
          
@@ -246,9 +244,9 @@ return (
     </div>  
     <Button 
      fullWidth type="submit" variant="contained"
-     
+      onClick={submitOn}
       disabled={!checked.input} color="primary">Sign Up</Button>
     </form>
   </div>
 );
-  }
+}

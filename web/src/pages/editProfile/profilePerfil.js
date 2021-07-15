@@ -116,9 +116,6 @@ try {
                             
                             onChange={e => setPhone2(e.target.value)}
                         />
-                            
-                       
-        
                         </div>
                         <br></br>
                         <Button onClick={handleSubmit}  buttonSize='btn--large'  type="submit">To edit</Button>

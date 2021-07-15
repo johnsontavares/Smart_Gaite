@@ -146,8 +146,23 @@ function mostrarForca(forca){
 
 
 return (
-  <div >
-  <div><a href="/"><img src="https://i.imgur.com/tDvwyyA.png" className={'logo2'} title="source: imgur.com" /></a></div>
+<div >
+
+<nav class="navbar navbar-expand-sm bg-light">
+<img src="https://i.imgur.com/tDvwyyA.png" className={'logo2'} title="source: imgur.com"/>
+  <div class="container-fluid">
+  <br></br>
+  <br></br>
+  <a class="navbar-brand" href="/">Login</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      
+      </div>
+  </div>
+</nav>
+
     <form >
     
       <h1 className='title'>Register</h1>

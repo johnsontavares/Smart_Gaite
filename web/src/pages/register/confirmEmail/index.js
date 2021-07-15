@@ -5,7 +5,7 @@ import FormDialog from '../confirmEmail/component/FormDialog';
 
 export default function ComfirmEmail() {
     
-    const  emailStorage = sessionStorage.getItem('emailValidator');
+const  emailStorage = sessionStorage.getItem('emailValidator');
       
     
 

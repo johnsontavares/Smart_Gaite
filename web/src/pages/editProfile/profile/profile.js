@@ -51,12 +51,11 @@ export default class Profile extends Component{
                         <th>ESPECIALIZAÇÃO </th><br></br>
                         <th>TELEFONE </th><br></br>
                     </tr>
-                    {/* const number = this.state.userDoctor.phone */}
                         <tr>
                         <td>{this.state.userDoctor.name}</td><br></br>
                         <td>{this.state.userDoctor.email}</td><br></br>
                         <td>{this.state.userDoctor.specialization}</td><br></br>
-                        <td>{this.state.userDoctor.phone.replace(/^(\d\d)(\d)/g,"($1)$2").replace(/(\d{4})(\d)/,"$1-$2")} </td><br></br>
+                        <td>{this.state.userDoctor.phone}</td><br></br>
                         </tr>
                     </table>
                     <br></br>

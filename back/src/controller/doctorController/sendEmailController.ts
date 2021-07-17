@@ -12,7 +12,7 @@ class SendEmailController{
         const doctorRepository = getCustomRepository(DoctorRepository);
 
         const {email} = req.body;
-
+        console.log(email)
         try {
         const user = await doctorRepository.findByEmail(email);
         if(!user){

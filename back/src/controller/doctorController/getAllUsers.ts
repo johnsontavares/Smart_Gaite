@@ -15,7 +15,6 @@ class AllUsers{
         return res.json(DoctorData);
     }
 
-
     public async getAll(req:Request, res:Response): Promise<Response>{
         
         const allDoctors = await getRepository(Doctor).find();

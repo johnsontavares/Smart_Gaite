@@ -58,7 +58,7 @@ return (
   <h1 className={"title"}>Start your login.</h1>
     
     <div className={"question"}>
-    <input type="email" name="email"id="email" type="email" required required onChange={e => setEmail(e.target.value)} />
+    <input type="email" name="email"id="email" type="email"  required onChange={e => setEmail(e.target.value)} />
     <label>E-mail:</label>
     </div>
     <div className = {"question"}>

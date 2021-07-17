@@ -123,9 +123,11 @@ try {
                       <MenuItem value={"Hematologia"}>Hematologia</MenuItem>
                       <MenuItem value={"CIRURGIA PlÁSTICA"}>Cirurgia Plástica</MenuItem>
                       <MenuItem value={"CIRURGIA GERAL"}>Cirurgia Geral</MenuItem>
+                      <MenuItem value={"Nenhuma"}>Nenhuma</MenuItem>
                       <MenuItem value={"GINECOLOGIA E OBSTETRÍCIA (Ultra-sonografia em ginecologia e obstetrícia)"}>GINECOLOGIA E OBSTETRÍCIA (Ultra-sonografia em ginecologia e obstetrícia)</MenuItem>
+                      <MenuItem value={"Nenhuma"}>Nenhuma</MenuItem>
 
-                      console.log(specialization)
+                      {/* console.log(specialization) */}
                       {/* <MenuItem value={specialization}>{specialization}</MenuItem> */}
 
                     </Select>

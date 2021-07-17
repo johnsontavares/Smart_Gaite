@@ -42,7 +42,7 @@ class ProfileController {
       userDoc.phone2 = phone2;
       userDoc.specialization = specialization;
 
-      userRepository.save(userDoc);
+      await userRepository.update(userDoc.id, userDoc);
       return response.status(200).json({message: "Profile edited successfully"})
     } 
     } catch (error) {

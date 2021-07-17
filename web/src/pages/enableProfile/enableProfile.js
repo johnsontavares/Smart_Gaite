@@ -15,8 +15,8 @@ export default function EnableProfile(){
     try {
     
     axios({
-        method:'PATCH',
-        url:`https://server-gait.herokuapp.com/enable/${idUsuario}`,
+        method:'PUT',
+        url:`http://localhost:8081/enable/${idUsuario}`,
         headers:{
             'Authorization':localStorage.getItem('token')
         }

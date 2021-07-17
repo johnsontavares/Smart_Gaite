@@ -8,7 +8,7 @@ export default function ForgotPass(){
     const emailPass  = sessionStorage.getItem('forgotPassword')
     console.log(emailPass)
     return (
-    <form >
+        <form >
     <div>
         <h2 className='subtitle'>Almost there,
         Please confirm your email to
